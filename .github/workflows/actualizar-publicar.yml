@@ -43,7 +43,16 @@ jobs:
           if [ -d data/cba_informes ]; then git add data/cba_informes/*.pdf || true; fi
           if ! git diff --cached --quiet; then
             git commit -m 'Actualizar series verificadas IPC y CBA'
-            git push origin HEAD:${{ github.ref_name }}
+          
+            # Obtener los commits incorporados mientras corría el Action.
+            git fetch origin "${{ github.ref_name }}"
+          
+            # Reaplicar el commit generado sobre la última versión remota.
+            # Si existe un conflicto, el paso falla y evita sobrescrituras.
+            git rebase "origin/${{ github.ref_name }}"
+          
+            # Publicar los datos validados sin forzar el repositorio remoto.
+            git push origin "HEAD:${{ github.ref_name }}"
           fi
       - name: Guardar sitio validado
         uses: actions/upload-pages-artifact@v3
