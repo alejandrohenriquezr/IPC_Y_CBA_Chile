@@ -90,3 +90,9 @@ El orquestador usa una copia temporal; si descarga, extracción, transformación
 ### Cobertura y estado de actualización
 
 La cobertura vigente y fecha de generación se almacenan en [`data/estado_actualizacion.json`](data/estado_actualizacion.json). Este archivo se genera desde el Excel en cada ejecución válida, evitando mantener fechas de corte manualmente en el README.
+
+### Navegación jerárquica del IPC
+
+En el universo **IPC completo**, cada barra permite consultar las categorías del nivel inferior siguiendo los códigos oficiales de clasificación: División → Grupo → Clase → Subclase → Producto. La ruta seleccionada se presenta como una miga de pan; cada uno de sus enlaces permite regresar a un nivel anterior. Los filtros de período, sentido de ordenamiento y cantidad de categorías se conservan durante la navegación. Al cambiar de universo, división o nivel inicial, la ruta se restablece.
+
+La navegación utiliza los códigos jerárquicos contenidos en `data/ipc_cba_actualizado.xlsx` y se genera mediante `scripts/03_generar_html.py` a partir de `site/plantilla.html`. El universo **Productos vinculados a la CBA** está definido directamente a nivel Producto y no presenta categorías descendientes.
