@@ -1,0 +1,60 @@
+name: Validar y publicar CBA–IPC
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '25 13 * * 1-5'
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: cba-ipc-pages
+  cancel-in-progress: false
+jobs:
+  construir:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements-actions.txt
+      - name: Probar fórmulas estadísticas
+        run: python -m unittest discover -s tests -v
+      - name: Descargar, procesar y validar en staging
+        run: python scripts/00_orquestador.py --actualizar
+      - name: Verificación final
+        run: python scripts/04_validar.py
+      - name: Guardar artefactos de datos
+        uses: actions/upload-artifact@v4
+        with:
+          name: datos-validados
+          path: |
+            data/ipc_cba_actualizado.xlsx
+            data/cba_series.json
+            data/estado_actualizacion.json
+          if-no-files-found: error
+      - name: Registrar datos verificados en el repositorio
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/ipc_fuente.xlsx data/ipc_cba_actualizado.xlsx data/cba_series.json data/estado_actualizacion.json site/index.html
+          if [ -f data/cba_fuentes_validadas.json ]; then git add data/cba_fuentes_validadas.json; fi
+          if [ -d data/cba_informes ]; then git add data/cba_informes/*.pdf || true; fi
+          if ! git diff --cached --quiet; then
+            git commit -m 'Actualizar series verificadas IPC y CBA'
+            git push origin HEAD:${{ github.ref_name }}
+          fi
+      - name: Guardar sitio validado
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+  publicar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/deploy-pages@v4
+        id: deployment

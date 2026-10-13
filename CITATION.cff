@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+title: CBA e IPC de Chile: evolución y ranking de productos
+message: "Cite este proyecto mediante los metadatos de autoría y versión."
+type: software
+authors:
+  - family-names: Henríquez
+    given-names: Alejandro
+    email: alejandro.henriquezr@hotmail.com
+    website: https://www.linkedin.com/in/alejandro-henríquez-rodríguez-baab18358
+version: 1.0.0
+repository-code: https://github.com/alejandrohenriquezr/IPC_Y_CBA_Chile
