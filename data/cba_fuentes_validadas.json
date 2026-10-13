@@ -1,0 +1,52 @@
+{
+  "informes": [
+    {
+      "mes": "2026-01",
+      "valor": 89570,
+      "fuente": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/cba/nueva_serie/2026/Informe_CBA_2026_01.pdf",
+      "sha256": "25f779644b49e5631e420ea2fe50eddd879fb222812d73e5eb15d471c33c9a83"
+    },
+    {
+      "mes": "2026-02",
+      "valor": 89769,
+      "fuente": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/cba/nueva_serie/2026/Informe_CBA_2026_02.pdf",
+      "sha256": "5cd7d20ee8ea7e8058f36c6940421729837cf82c7c8f62f43323095ca36ba319"
+    },
+    {
+      "mes": "2026-03",
+      "valor": 90261,
+      "fuente": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/cba/nueva_serie/2026/Informe_CBA_2026_03.pdf",
+      "sha256": "517e6c99becd2489eda101d8e43584fbf4dbe7368873d96d1d64d397d6898575"
+    },
+    {
+      "mes": "2026-04",
+      "valor": 90384,
+      "fuente": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/cba/nueva_serie/2026/Informe_CBA_2026_04.pdf",
+      "sha256": "cde9b3d5d225697b6d9f6a7cff02f04691dfab12116d49b5462309a7c3410667"
+    },
+    {
+      "mes": "2026-05",
+      "valor": 89995,
+      "fuente": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/cba/nueva_serie/2026/Informe_CBA_2026_05.pdf",
+      "sha256": "f47a0252fe5f7a3f717571f082fc61d3bd7b0372600daa66cd0458e0bf633ba3"
+    },
+    {
+      "mes": "2026-06",
+      "valor": 90658,
+      "fuente": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/cba/nueva_serie/2026/Informe_CBA_2026_06.pdf",
+      "sha256": "63d9e7be4c3e0637663c909d691af7c32e5120e8c920fd38b0a39154280ed35c"
+    },
+    {
+      "mes": "2026-07",
+      "valor": 91220,
+      "fuente": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/cba/nueva_serie/2026/Informe_CBA_2026_07.pdf",
+      "sha256": "d2c78bb4d620db4b948a941cf11039a792dc869f87ed0b75178b8849928411f3"
+    },
+    {
+      "mes": "2026-08",
+      "valor": 92327,
+      "fuente": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/cba/nueva_serie/2026/Informe_CBA_2026_08.pdf",
+      "sha256": "8aa887897dae07d195493679c8f63f6c6c6075395a995cd42921508a5f2b8313"
+    }
+  ]
+}
