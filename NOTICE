@@ -1,0 +1,23 @@
+IPC y CBA Chile
+Copyright 2026 Alejandro Henríquez
+https://github.com/alejandrohenriquezr/IPC_Y_CBA_Chile
+
+El código original y la documentación de elaboración propia se distribuyen bajo
+Apache License, Version 2.0; consultar el archivo LICENSE.
+
+Los datos, cuadros y publicaciones de terceros incluidos o enlazados por este
+proyecto no quedan sujetos a esa licencia por el solo hecho de estar en el
+repositorio. La atribución y los términos de cada fuente se documentan en
+docs/LICENCIAS_DATOS.md.
+
+Instituto Nacional de Estadísticas (INE), Chile:
+IPC, base anual 2023=100; información de origen con licencia CC BY-SA 4.0,
+según los términos publicados por el INE.
+
+Ministerio de Desarrollo Social y Familia, Observatorio Social:
+Canasta Básica de Alimentos (CBA) y documentos metodológicos; conservar
+créditos y respetar los términos propios de la fuente.
+
+Este es un proyecto independiente de análisis y visualización. La autoría de
+las transformaciones, correspondencias y estimaciones propias no supone
+respaldo ni aprobación institucional de los organismos proveedores de datos.
