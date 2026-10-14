@@ -9,3 +9,15 @@ La columna `cba` en productos del IPC describe **pertenencia según corresponden
 El gasto de referencia permite calcular `participación_i = gasto_i / gasto_total`, pero esa proporción **no constituye** la ponderación del IPC. No se debe mezclar con la metodología de actualización monetaria de la CBA.
 
 **Fuentes:** MDSF (2026), Metodología 2024, anexo 6.2, pp. 42–44; INE, IPC base 2023=100, libro de series de tiempo, sin paginación. Enlace en [metodología](METODOLOGIA.md).
+
+## Uso de las correspondencias para contribuciones
+
+Las correspondencias se resuelven por nombre normalizado y división IPC,
+y se relacionan con códigos únicos de producto. Los gastos de varios
+componentes vinculados al mismo producto se agregan antes del cálculo.
+No se asigna gasto al PAE. Los casos sin vínculo unívoco se excluyen del
+subtotal y se registran en la comprobación de cobertura.
+
+Las contribuciones representan el cambio del subtotal homologado, no el
+cambio de la CBA oficial. La ponderación es relativa al subtotal de gastos
+vinculados y no al IPC general.

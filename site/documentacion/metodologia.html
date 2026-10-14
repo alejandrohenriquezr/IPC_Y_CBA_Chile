@@ -1,0 +1,82 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Metodología | IPC y CBA</title><link rel="stylesheet" href="../assets/navegacion.css"></head><body class="doc-body"><header class="sitehead"><button type="button" class="site-menu-toggle" aria-label="Abrir menú de navegación" aria-controls="site-menu" aria-expanded="false">☰</button><a class="brand" href="../index.html">IPC y CBA</a><span class="brand-sub">Chile · Visualización estadística</span></header><div class="site-nav-backdrop"></div><aside class="site-menu" id="site-menu" aria-label="Navegación principal"><div class="top">IPC y CBA <button type="button" class="nav-close" aria-label="Cerrar menú">✕</button></div><nav><a data-page="visualizaciones" href="../index.html">Visualizaciones</a><a data-page="guia" href="../documentacion/guia-lectura.html">Guía de lectura</a><a data-page="metodologia" href="../documentacion/metodologia.html" aria-current="page">Metodología</a><a data-page="cba" href="../documentacion/canasta-basica.html">Canasta Básica Alimentaria</a><a data-page="fuentes" href="../documentacion/fuentes-datos.html">Fuentes y datos</a><a data-page="acerca" href="../documentacion/acerca.html">Acerca del proyecto</a></nav><div class="nav-bottom">Visualizador estadístico independiente · Chile</div></aside><main class="doc-shell" id="contenido"><div class="crumb"><a href="../index.html">Inicio</a> › Metodología</div><h1>Metodología</h1><p class="doc-intro">Fuentes, fórmulas, incidencias, cobertura y limitaciones de los indicadores.</p><h2>Qué representan los datos</h2>
+<p><strong>Montos oficiales:</strong> Canasta Básica de Alimentos (CBA) metodología 2024, valores monetarios mensuales publicados por el Ministerio de Desarrollo Social y Familia. Primera publicación bajo esta serie en 2026.</p>
+<p><strong>Montos retroproyectados:</strong> estimación experimental de qué costo habría tenido el valor de enero de 2026 trasladado hacia atrás mediante las variaciones del índice de la división 1 del IPC base 2023=100.</p>
+<p><strong>Ranking de productos:</strong> variación de cada producto IPC respecto de su propio índice de enero 2024, con filtro de correspondencias analíticas CBA–IPC. No se presenta como gasto ni contribución a la canasta oficial.</p>
+<h2>Fórmulas implementadas</h2>
+<p>Sea <code>A=89.570 CLP</code> (enero 2026, ancla oficial), <code>F_t</code> el índice oficial de la división Alimentos y bebidas no alcohólicas del IPC, y <code>F_A</code> el correspondiente a enero 2026:</p>
+<p><code>CBA_proxy_t = A × F_t / F_A</code>, para enero 2024–diciembre 2025.</p>
+<p><code>Variación_producto_i,t = (IPC_producto_i,t / IPC_producto_i,2024-01 - 1) × 100</code>.</p>
+<p>La aproximación por división 1 <strong>no replica</strong> el deflactor oficial de actualización de la CBA. La metodología del Ministerio considera alimentos dentro y fuera del hogar; un retrocálculo exacto exige el índice compuesto y los ponderadores empleados en cada período. Si se obtienen, corresponde sustituir el proxy y mantener una serie de control paralela.</p>
+<p>No se empalman directamente valores de la metodología 2013 con los de 2024.</p>
+<h2>Restricciones de publicación</h2>
+<ul>
+<li>Mostrar tramo retroproyectado con línea discontinua, leyenda «Estimación experimental» y fuente IPC / ancla ministerial.</li>
+<li>Mostrar valores publicados con línea continua y leyenda «Oficial».</li>
+<li>Validar que las variaciones calculadas con valores redondeados pueden diferir de la variación oficial comunicada.</li>
+<li>No deducir precios de productos a partir de índices ni sumar índices no ponderados para inferir el valor de CBA.</li>
+<li>Si cambian definiciones, base IPC o informes del Ministerio, suspender la actualización y documentar el corte.</li>
+</ul>
+<h2>Fuentes y páginas</h2>
+<ol>
+<li><strong>Ministerio de Desarrollo Social y Familia (2026)</strong>, <em>Metodología de Medición de la Pobreza por Ingresos en Chile. Actualización 2024</em>, sección 2.9, p. 31 (deflactor), y anexo 6.2, pp. 42–44 (composición, cantidades y gasto). <a href="https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/casen/2024/Metodologia_de_Medicion_de_la_Pobreza_por_Ingresos_2024.pdf">https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/casen/2024/Metodologia_de_Medicion_de_la_Pobreza_por_Ingresos_2024.pdf</a></li>
+<li><strong>Ministerio de Desarrollo Social y Familia</strong>, <em>Valor de la Canasta Básica de Alimentos y Líneas de Pobreza</em>, informes mensuales 2026, cuadro 1, p. 5 (montos). <a href="https://observatorio.ministeriodesarrollosocial.gob.cl/nueva-serie-cba-2026">https://observatorio.ministeriodesarrollosocial.gob.cl/nueva-serie-cba-2026</a></li>
+<li><strong>INE</strong>, <em>Índice de Precios al Consumidor, base anual 2023=100. Series de tiempo</em>, hoja <code>IPC 2023=100</code>, sin paginación (índices mensuales por nivel). <a href="https://www.ine.gob.cl/docs/default-source/%C3%ADndice-de-precios-al-consumidor/cuadros-estadisticos/base-anual-2023_100/series-de-tiempo/ipc-xls.xlsx">https://www.ine.gob.cl/docs/default-source/%C3%ADndice-de-precios-al-consumidor/cuadros-estadisticos/base-anual-2023_100/series-de-tiempo/ipc-xls.xlsx</a></li>
+</ol>
+<h2>Atribución por conjunto de datos</h2>
+<p>Los gráficos monetarios identifican al Ministerio de Desarrollo Social y Familia como fuente de los valores publicados y al INE como fuente del índice empleado en la estimación histórica. El ranking de productos utiliza las series del IPC del INE y la composición de la CBA documentada por el Ministerio. Las leyendas distinguen expresamente los valores oficiales de las estimaciones experimentales.</p>
+<h2>Trazabilidad computacional</h2>
+<p>El libro <code>data/ipc_cba_actualizado.xlsx</code> es la fuente de las cifras del gráfico. <code>IPC series</code> contiene variaciones acumuladas desde enero de 2024 calculadas a partir de los índices de la fuente IPC; <code>CBA valores</code> distingue los importes publicados y las estimaciones retrospectivas. El proceso actualiza la estimación experimental usando el cociente de índices de la división 1 y el primer valor oficial CBA del libro. Ni el HTML ni el código Python contienen importes estadísticos de referencia fijos. Los períodos históricos no deben presentarse como resultados oficiales.</p>
+<h3>Criterios de variación del ranking</h3>
+<p>Para cada categoría, la hoja <code>IPC series</code> conserva <code>v_t</code>, variación (%) del índice respecto de enero de 2024. La variación porcentual entre el período de referencia <code>r</code> y el mes <code>t</code> se obtiene mediante <code>100 × [(100 + v_t)/(100 + v_r) − 1]</code>. Las referencias disponibles son: mes anterior, mismo mes doce meses atrás, diciembre del año anterior y enero de 2024. Se excluyen del ranking las observaciones cuyo período de referencia no existe en la serie. El sentido del ordenamiento no altera la medida: ▲ ordena de mayor a menor; ▼ ordena de menor a mayor, incluidas tasas negativas.</p>
+<h2>Incidencias del IPC y contribuciones experimentales a la CBA</h2>
+<p>El archivo original <code>data/ipc_fuente.xlsx</code>, hoja <code>IPC 2023=100</code>, publica
+ponderaciones y tres campos de incidencias por categoría: mensual, acumulada
+anual y a doce meses. El proceso <code>scripts/02b_actualizar_incidencias.py</code> conserva
+esos valores en <code>IPC incidencias</code>, identificados por código y mes. Las cifras se
+expresan en puntos porcentuales (p.p.). No se estiman incidencias del IPC para
+el intervalo con referencia fija enero de 2024, porque esta incidencia no
+está publicada como columna oficial de la fuente utilizada.</p>
+<p>Para los productos vinculados a la CBA, la hoja <code>CBA incidencias estimadas</code>
+registra los gastos de referencia asociados mediante correspondencias
+analíticas y su evolución proporcional por índice IPC. La contribución del
+producto <code>j</code> entre los meses <code>r</code> y <code>t</code> se obtiene como:</p>
+<p><code>c_j(t,r) = 100 * G_j * (I_j,t/I_j,0 - I_j,r/I_j,0) / SUM_k[G_k*(I_k,r/I_k,0)]</code></p>
+<p><code>G_j</code> suma los gastos de componentes CBA que corresponden analíticamente al
+mismo código de producto IPC. El denominador representa exclusivamente el
+<strong>subtotal vinculado</strong> y se actualiza al período <code>r</code>. La suma de todas las
+contribuciones reproduce la variación del subtotal experimental para el
+intervalo elegido, salvo redondeo. Los gastos se toman del anexo metodológico
+y no implican precios observados en enero de 2024.</p>
+<p>El indicador CBA <strong>no mide incidencias oficiales de la CBA monetaria</strong>.
+La metodología de actualización monetaria del Ministerio utiliza un
+indicador agregado distinto. Las diferencias nominales y agregaciones en
+las correspondencias impiden interpretar el cálculo como una descomposición
+oficial de la canasta publicada.</p>
+<p><strong>Fuente de incidencias IPC:</strong> INE, IPC base 2023=100, archivo <code>ipc-xls.xlsx</code>,
+columnas <code>Ponderación</code>, <code>Incidencia Mensual (%)</code>, <code>Incidencia Acumulada (%)</code>
+e <code>Incidencia 12 Meses (%)</code>, hoja sin paginación; Manual Metodológico IPC
+base 2023=100, sección 8.1.5, cálculo de incidencias.</p>
+<p><strong>Fuente de gastos CBA:</strong> Ministerio de Desarrollo Social y Familia,
+<em>Metodología de Medición de la Pobreza por Ingresos. Actualización 2024</em>,
+anexo 6.2, pp. 42–44.</p>
+<h2>Incidencias calculadas desde enero de 2024</h2>
+<p>La hoja <strong>IPC incidencias</strong> contiene la columna «Incidencia desde ene. 2024 (p.p.)»,
+calculada a partir de los índices de cada categoría y su ponderación oficial del
+IPC base anual 2023=100. Se utiliza el índice general de enero de 2024 como
+denominador común:</p>
+<p><code>Incidencia_i(t; ene. 2024) = (Índice_i(t) - Índice_i(ene. 2024)) × Ponderación_i(%) / Índice_general(ene. 2024)</code></p>
+<p>La unidad de medida es <strong>puntos porcentuales</strong>. La ponderación se expresa en
+puntos porcentuales (por ejemplo, 22,15), no como proporción decimal.</p>
+<p>El período «Desde enero de 2024» corresponde a una <strong>incidencia calculada
+por elaboración propia</strong>, no a una serie publicada directamente por el INE.
+Las incidencias mensual, acumulada anual y a doce meses se obtienen de las
+columnas publicadas por el INE. La identidad de control exige que la suma de
+incidencias de cada nivel de clasificación reproduzca la variación acumulada
+del IPC general para todos los meses, dentro de una tolerancia máxima de
+0,01 puntos porcentuales atribuible a redondeos de los índices publicados.</p>
+<p>Las categorías de diferentes niveles no deben sumarse entre sí, pues ello
+contaría reiteradamente los mismos componentes del IPC. La selección de las
+primeras barras del ranking tampoco debe interpretarse como el total del IPC.</p>
+<p><strong>Fuente:</strong> Elaboración propia en base a índices y ponderaciones del INE,
+IPC base anual 2023=100. Véase el <em>Manual Metodológico del IPC</em>, sección 8.1.5.</p>
+<footer class="doc-footer">IPC y CBA · Proyecto independiente. Las elaboraciones analíticas no constituyen publicaciones oficiales del INE o del Ministerio de Desarrollo Social y Familia.</footer></main><script src="../assets/navegacion.js" defer></script><script>if(window.parent!==window){document.querySelector('.sitehead').style.display='none';document.querySelector('a[href="../index.html"]').addEventListener('click',e=>{e.preventDefault();window.parent.postMessage({type:'ipc-cba-home'},'*');});}</script></body></html>

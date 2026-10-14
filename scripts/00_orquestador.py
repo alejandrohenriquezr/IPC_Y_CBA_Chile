@@ -3,14 +3,14 @@ import argparse, subprocess, sys, tempfile, shutil, os
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 FILES=['data/ipc_fuente.xlsx','data/ipc_cba_actualizado.xlsx','data/cba_series.json',
-       'data/cba_fuentes_validadas.json','site/index.html','data/estado_actualizacion.json']
+       'data/cba_fuentes_validadas.json','site/index.html','site/datos/ipc_cba_actualizado.xlsx','site/datos/estado_actualizacion.json','data/estado_actualizacion.json']
 def main():
     p=argparse.ArgumentParser();p.add_argument('--actualizar',action='store_true');args=p.parse_args()
     # Copia separada: ninguna etapa puede escribir en los artefactos publicados.
     with tempfile.TemporaryDirectory(prefix='cba-ipc-stage-') as td:
         root=Path(td)/'repo'
         shutil.copytree(ROOT,root,ignore=shutil.ignore_patterns('__pycache__','.git'))
-        stages=['01_descargar_fuentes.py','02_actualizar_excel.py','03_generar_html.py','04_validar.py']
+        stages=['01_descargar_fuentes.py','02_actualizar_excel.py','02b_actualizar_incidencias.py','03_generar_html.py','04_validar.py']
         for name in stages:
             cmd=[sys.executable,str(root/'scripts'/name)]
             if name=='01_descargar_fuentes.py' and args.actualizar:cmd.append('--actualizar')

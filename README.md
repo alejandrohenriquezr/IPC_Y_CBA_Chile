@@ -53,26 +53,9 @@ La visualización monetaria identifica los informes de la CBA del Ministerio de 
 - Los artefactos publicados se someten a controles automáticos y contrastes con los informes en PDF.
 - No corresponde describir la retroproyección mediante IPC división 1 como «deflactor oficial».
 
-## Licencia y contribuciones
+## Licencias y atribución
 
-Copyright 2026 Alejandro Henríquez. El código y la documentación originales
-se distribuyen bajo [Apache License 2.0](LICENSE); los avisos de atribución
-figuran en [NOTICE](NOTICE). La licencia del software no reemplaza las
-condiciones aplicables a las fuentes estadísticas de terceros.
-
-Los datos del INE se rigen por sus términos de uso y la licencia CC BY-SA 4.0.
-Los materiales del Ministerio de Desarrollo Social y Familia mantienen sus
-propias condiciones. Las fuentes y el tratamiento de datos transformados se
-describen en [Licencias y procedencia de datos](docs/LICENCIAS_DATOS.md).
-
-Las contribuciones se gestionan mediante Issues y Pull Requests, conforme a
-[CONTRIBUTING.md](CONTRIBUTING.md) y al
-[Código de conducta](CODE_OF_CONDUCT.md). Los cambios deben conservar
-trazabilidad estadística y ser compatibles con las licencias aplicables.
-
-Este es un proyecto independiente; sus correspondencias, visualizaciones
-y estimaciones no constituyen publicaciones oficiales ni implican respaldo
-institucional del INE o del Ministerio.
+Este repositorio no contiene un archivo de licencia de software. En ausencia de una licencia explícita, no debe presumirse autorización de redistribución o modificación. Los datos y publicaciones originales mantienen las condiciones de uso de sus instituciones emisoras.
 
 ## Visualización CBA en pesos y variaciones
 
@@ -113,3 +96,71 @@ La cobertura vigente y fecha de generación se almacenan en [`data/estado_actual
 En el universo **IPC completo**, cada barra permite consultar las categorías del nivel inferior siguiendo los códigos oficiales de clasificación: División → Grupo → Clase → Subclase → Producto. La ruta seleccionada se presenta como una miga de pan; cada uno de sus enlaces permite regresar a un nivel anterior. Los filtros de período, sentido de ordenamiento y cantidad de categorías se conservan durante la navegación. Al cambiar de universo, división o nivel inicial, la ruta se restablece.
 
 La navegación utiliza los códigos jerárquicos contenidos en `data/ipc_cba_actualizado.xlsx` y se genera mediante `scripts/03_generar_html.py` a partir de `site/plantilla.html`. El universo **Productos vinculados a la CBA** está definido directamente a nivel Producto y no presenta categorías descendientes.
+
+## Incidencias y contribuciones
+
+El ranking permite consultar **variaciones (%)** o **incidencias/contribuciones
+(puntos porcentuales)**. En el universo IPC completo se usan las incidencias
+publicadas por el INE para el mes, el acumulado anual y doce meses. La
+incidencia oficial desde enero de 2024 no está disponible en los datos usados.
+
+En el universo de productos CBA se representa una **contribución experimental
+al cambio de costo del subtotal de componentes homologados**. No corresponde
+a una incidencia de la serie monetaria oficial de la CBA. El Excel contiene
+las hojas `IPC incidencias` y `CBA incidencias estimadas`. El script
+`scripts/02b_actualizar_incidencias.py` se ejecuta después de actualizar el
+IPC y antes de generar el HTML.
+
+Las fórmulas, fuentes, restricciones y reglas de trazabilidad se describen en
+[Metodología](docs/METODOLOGIA.md) y [Correspondencias](docs/CORRESPONDENCIAS.md).
+
+### Incidencia acumulada desde enero de 2024
+
+La vista del IPC completo incorpora «Desde enero de 2024» en el selector de
+incidencias. Esta opción utiliza índices y ponderaciones oficiales del INE,
+calcula las contribuciones en puntos porcentuales y verifica su suma contra
+la variación del IPC general en cada mes y nivel de clasificación. Los otros
+horizontes de incidencia corresponden a valores publicados por el INE.
+El procedimiento reproducible se documenta en
+[Metodología](docs/METODOLOGIA.md). El título de la pestaña del sitio es
+«IPC y CBA».
+
+### Configuración inicial y controles de la visualización
+
+La interfaz abre por defecto la vista **Variaciones del IPC**, con universo **IPC**.
+La vista monetaria de la CBA ofrece referencias desde enero de 2024, desde enero
+del último año con al menos tres meses disponibles hasta el período seleccionado,
+y durante los últimos doce meses. La referencia anual y su etiqueta se actualizan
+según el período disponible; las series históricas conservan la distinción entre
+valores oficiales y estimaciones experimentales.
+
+### Velocidad de reproducción del ranking
+
+La animación utiliza una velocidad inicial de 1× (1,6 segundos por mes) y
+permite 0,75×, 1×, 1,25× y 1,5×. Las exportaciones GIF y video mantienen
+la velocidad de referencia 1×, independiente del control interactivo.
+
+### Escala temporal del ranking
+
+Las barras mantienen una escala horizontal fija mientras se reproduce la serie.
+El dominio se calcula con todas las categorías elegibles de la selección y
+con todos los meses disponibles, incluidos valores negativos, con margen del
+10 % y cero invariable. Al cambiar universo, nivel, división, indicador,
+período o ruta jerárquica se recalcula el dominio. Los videos y GIF usan la
+misma escala que la interfaz.
+
+### Etiquetas de valores y comienzo de la animación
+
+El ranking muestra el valor en el extremo exterior de cada barra, con signo y unidad
+según el indicador seleccionado (% para variaciones; p.p. para incidencias). La
+reproducción y las exportaciones comienzan en el primer mes con referencia válida,
+evitan los períodos sin observación comparable y conservan la escala fija para toda
+la secuencia seleccionada. Los controles y reglas temporales se describen en
+[Operación](docs/OPERACION.md).
+
+
+## Navegación y páginas de documentación
+
+La publicación estática en `site/` incluye un menú de navegación accesible desde `index.html` y las páginas HTML en `site/documentacion/`: guía de lectura, metodología, canasta básica, fuentes y datos, y acerca del proyecto. Los recursos compartidos están en `site/assets/`. Las páginas HTML operan como archivos estáticos y no requieren backend ni servicios externos.
+
+El Excel y el estado de actualización se distribuyen también en `site/datos/`, de forma que las descargas funcionan dentro del artefacto publicado por GitHub Pages. `scripts/03_generar_html.py` regenera esas copias a partir de `data/` y el orquestador promueve ambos resultados tras la validación. Las páginas de documentación se mantienen como archivos HTML versionados; al actualizar textos metodológicos en `docs/` deben actualizarse sus equivalentes de lectura en `site/documentacion/` cuando corresponda.
