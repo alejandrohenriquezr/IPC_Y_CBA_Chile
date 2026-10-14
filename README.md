@@ -53,9 +53,26 @@ La visualización monetaria identifica los informes de la CBA del Ministerio de 
 - Los artefactos publicados se someten a controles automáticos y contrastes con los informes en PDF.
 - No corresponde describir la retroproyección mediante IPC división 1 como «deflactor oficial».
 
-## Licencias y atribución
+## Licencia y contribuciones
 
-Este repositorio no contiene un archivo de licencia de software. En ausencia de una licencia explícita, no debe presumirse autorización de redistribución o modificación. Los datos y publicaciones originales mantienen las condiciones de uso de sus instituciones emisoras.
+Copyright 2026 Alejandro Henríquez. El código y la documentación originales
+se distribuyen bajo [Apache License 2.0](LICENSE); los avisos de atribución
+figuran en [NOTICE](NOTICE). La licencia del software no reemplaza las
+condiciones aplicables a las fuentes estadísticas de terceros.
+
+Los datos del INE se rigen por sus términos de uso y la licencia CC BY-SA 4.0.
+Los materiales del Ministerio de Desarrollo Social y Familia mantienen sus
+propias condiciones. Las fuentes y el tratamiento de datos transformados se
+describen en [Licencias y procedencia de datos](docs/LICENCIAS_DATOS.md).
+
+Las contribuciones se gestionan mediante Issues y Pull Requests, conforme a
+[CONTRIBUTING.md](CONTRIBUTING.md) y al
+[Código de conducta](CODE_OF_CONDUCT.md). Los cambios deben conservar
+trazabilidad estadística y ser compatibles con las licencias aplicables.
+
+Este es un proyecto independiente; sus correspondencias, visualizaciones
+y estimaciones no constituyen publicaciones oficiales ni implican respaldo
+institucional del INE o del Ministerio.
 
 ## Visualización CBA en pesos y variaciones
 
