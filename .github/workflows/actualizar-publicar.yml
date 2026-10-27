@@ -21,9 +21,30 @@ jobs:
       - run: pip install -r requirements-actions.txt
       - name: Probar fórmulas estadísticas
         run: python -m unittest discover -s tests -v
+      # El orquestador utiliza staging y solo promueve datos tras validar todo.
+      # Dos intentos cubren fallas transitorias de conexión con las fuentes.
       - name: Descargar, procesar y validar en staging
-        run: python scripts/00_orquestador.py --actualizar
-      - name: Verificación final
+        id: actualizar
+        continue-on-error: true
+        shell: bash
+        run: |
+          for intento in 1 2; do
+            if python scripts/00_orquestador.py --actualizar; then
+              exit 0
+            fi
+            if [ "$intento" -eq 1 ]; then
+              echo "::warning::No fue posible actualizar las fuentes (intento 1 de 2); reintentando."
+              sleep 15
+            fi
+          done
+          echo "::warning::Fuentes no disponibles o actualización inválida. Se conservarán los últimos datos validados."
+          exit 1
+      - name: Informar actualización no realizada
+        if: steps.actualizar.outcome == 'failure'
+        run: |
+          echo "::warning::El sitio se publicará solo si los datos existentes superan la verificación final. No se declarará una actualización de datos."
+          echo "⚠️ Actualización de fuentes no realizada; se conservan los datos previamente validados." >> "$GITHUB_STEP_SUMMARY"
+      - name: Verificación final de los datos que se publicarán
         run: python scripts/04_validar.py
       - name: Guardar artefactos de datos
         uses: actions/upload-artifact@v4
@@ -34,7 +55,9 @@ jobs:
             data/cba_series.json
             data/estado_actualizacion.json
           if-no-files-found: error
+      # Nunca registrar cambios de datos si la actualización falló.
       - name: Registrar datos verificados en el repositorio
+        if: steps.actualizar.outcome == 'success'
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
