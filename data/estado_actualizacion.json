@@ -1,10 +1,10 @@
 {
-  "generado_utc": "2026-11-12T20:56:04+00:00",
+  "generado_utc": "2026-11-13T20:31:48+00:00",
   "ipc_ultimo_mes": "2026-10",
   "ipc_primero": "2024-01",
   "ipc_categorias": 613,
-  "cba_oficial_ultimo_mes": "2026-09",
-  "cba_oficial_meses": 9,
+  "cba_oficial_ultimo_mes": "2026-10",
+  "cba_oficial_meses": 10,
   "cba_estimado_meses": 24,
   "retroproyeccion": "experimental: IPC división 1; no reproduce deflactor oficial compuesto"
 }

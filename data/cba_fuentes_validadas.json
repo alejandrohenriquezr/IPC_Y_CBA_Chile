@@ -53,6 +53,12 @@
       "valor": 92833,
       "fuente": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/cba/nueva_serie/2026/Informe_CBA_2026_09.pdf",
       "sha256": "7ef70bb56d876dd2402888390db7b60b259d8b21f51804fe22ec1de157cc28cf"
+    },
+    {
+      "mes": "2026-10",
+      "valor": 93678,
+      "fuente": "https://observatorio.ministeriodesarrollosocial.gob.cl/storage/docs/cba/nueva_serie/2026/Informe_CBA_2026_10.pdf",
+      "sha256": "39ec77dcde1d727824a42bc9b0d70088ec0048bfa3dbd82528a7c43d1324bcc1"
     }
   ]
 }
